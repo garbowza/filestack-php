@@ -464,7 +464,10 @@ trait CommonMixin
 
     protected function settlePromises($promises)
     {
-        $api_results = \GuzzleHttp\Promise\settle($promises)->wait();
+        //$api_results = \GuzzleHttp\Promise\settle($promises)->wait();
+        
+        // ZACK HACK - this is a workaround for above Guzzle settle function being deprecated
+        $api_results = \GuzzleHttp\Promise\Utils::settle($promises)->wait();
         return $api_results;
     }
 }
